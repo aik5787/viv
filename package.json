@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@cypress/grep": "^4.1.0",
+    "cypress": "^13.16.1"
+  },
+  "scripts": {
+    "smoke:chrome": "npx cypress run --env grepTags=@smoke --browser chrome"
+  }
+}

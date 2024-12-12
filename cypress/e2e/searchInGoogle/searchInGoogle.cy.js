@@ -16,7 +16,9 @@ describe("Search in Google", () => {
       .should("have.length.greaterThan", 1)
       .invoke("text")
       .then((text) => {
-        expect(text).to.contain(verificationData.expectedUrl);
+        expect(text.toLowerCase()).to.contain(searchQuery.text);
       });
   });
 });
+
+

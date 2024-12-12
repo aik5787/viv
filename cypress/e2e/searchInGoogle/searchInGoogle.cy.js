@@ -1,15 +1,13 @@
 import googlePage from "../../pages/googlePage.js";
 import searchQuery from "../../fixtures/searchQuery.json";
-import verificationData from "../../fixtures/vefificationData.json";
 
-describe("Search in Google", () => {
+describe("Google Search Test", () => {
   before(() => {
     cy.errorHandler();
-    cy.intercept({ resourceType: /xhr|fetch/ }, { log: false });
     cy.visit("https://www.google.com/");
   });
 
-  it("TC:0001 Should find the website in Google ", () => {
+  it("TC:0001  Should find the company name in Google search results", () => {
     googlePage.searchBar.type(`${searchQuery.text}{enter}`);
 
     googlePage.searchResultLink
@@ -20,5 +18,3 @@ describe("Search in Google", () => {
       });
   });
 });
-
-

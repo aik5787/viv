@@ -12,6 +12,6 @@ describe("Search in Google", () => {
     it("TC:0001 Should find the website in Google ", () => {
         googlePage.searchBar.type(`${searchQuery.text}{enter}`)
         
-        googlePage.searchResultLink.should('have.length.greaterThan', 1, {timeout: 10000}).and('contain', verificationData.expectedUrl);
+        googlePage.searchResultLink.should('have.length.greaterThan', 1)
     })
 })

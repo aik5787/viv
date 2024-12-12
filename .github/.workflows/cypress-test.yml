@@ -1,0 +1,32 @@
+name: Example Cypress GitHub Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to test'
+        required: false
+
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+
+jobs:
+  docker-included:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, edge, firefox]
+    container:
+      image: cypress/included:latest
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
+      - uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./
+          browser: ${{ matrix.browser }}
+        env:
+          CYPRESS_INSTALL_BINARY: 0

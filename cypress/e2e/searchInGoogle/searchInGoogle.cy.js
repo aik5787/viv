@@ -12,6 +12,6 @@ describe("Search in Google", () => {
     it("TC:0001 Should find the website in Google ", () => {
         googlePage.searchBar.type(`${searchQuery.text}{enter}`)
         
-        googlePage.searchResultLink.should('have.length.greaterThan', 1)
+        googlePage.searchResultLink.should('have.length.greaterThan', 1).and('contain', "https://www.vivtechnologies.com/");
     })
 })

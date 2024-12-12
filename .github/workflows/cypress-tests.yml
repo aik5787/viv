@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chrome, firefox]
+        browser: [chrome, edge, firefox]
     container:
       image: cypress/included:latest
       options: --user 1001
@@ -24,8 +24,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci
-      - name: Run Cypress Tests
-        run: npm run run:${{ matrix.browser }}
+      - uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./
+          browser: ${{ matrix.browser }}
         env:
           CYPRESS_INSTALL_BINARY: 0
       - name: Upload Mochawesome reports

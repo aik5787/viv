@@ -1,9 +1,13 @@
 {
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
-    "cypress": "^13.16.1"
+    "cypress": "^13.16.1",
+    "cypress-mochawesome-reporter": "^3.8.2"
   },
   "scripts": {
-    "smoke:chrome": "npx cypress run --env grepTags=@smoke --browser chrome"
+    "smoke:chrome": "npx cypress run --env grepTags=@smoke --browser chrome",
+    "clean:reports": "rm -rf cypress/reports",
+    "run:chrome": "npm run clean:reports && npx cypress run --browser chrome",
+    "run:firefox": "npm run clean:reports && npx cypress run --browser firefox"
   }
 }

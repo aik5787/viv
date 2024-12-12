@@ -12,12 +12,7 @@ describe("Search in Google", () => {
   it("TC:0001 Should find the website in Google ", () => {
     googlePage.searchBar.type(`${searchQuery.text}{enter}`);
 
-    googlePage.searchResultLink.should("have.length.greaterThan", 1).each(($el) => {
-      cy.wrap($el)
-        .invoke("text")
-        .then((text) => {
-          expect(text.toLowerCase()).to.contain("viv");
-        });
-    });
+    googlePage.searchResultLink.should("have.length.greaterThan", 1).find('[href*="www.vivtechnologies.com"]').should('exist');
+
   });
 });

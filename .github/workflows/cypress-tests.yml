@@ -24,8 +24,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci
+      - name: Set Browser Environment
+        run: echo "BROWSER=${{ matrix.browser }}" >> $GITHUB_ENV  
       - name: Run Cypress Tests in Parallel
-        run: npm run all -- --browser ${{ matrix.browser }}
+        run: npm run all
         env:
           CYPRESS_INSTALL_BINARY: 0
       - name: Upload Mochawesome reports

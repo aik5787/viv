@@ -7,7 +7,7 @@ module.exports = defineConfig({
     viewPortHeight: 1080,
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
-      reportDir: "cypress/reports",
+      reportDir: "reports",
       overwrite: false,
       html: true,
       json: true,
@@ -15,7 +15,7 @@ module.exports = defineConfig({
     },
     setupNodeEvents(on, config) {
       require('@cypress/grep/src/plugin')(config);
-      require('cypress-mochawesome-reporter/plugin')(on);
+      // require('cypress-mochawesome-reporter/plugin')(on);
       on('before:browser:launch', (browser, launchOptions) => {
         if (browser.name === 'firefox') {
           launchOptions.preferences['browser.cache.disk.enable'] = false;

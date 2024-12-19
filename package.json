@@ -2,12 +2,19 @@
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
     "cypress": "^13.16.1",
-    "cypress-mochawesome-reporter": "^3.8.2"
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-parallel": "^0.14.0",
+    "npm-run-all": "^4.1.5"
   },
   "scripts": {
     "smoke:chrome": "npx cypress run --env grepTags=@smoke --browser chrome",
-    "clean:reports": "rm -rf cypress/reports",
-    "run:chrome": "npm run clean:reports && npx cypress run --browser chrome",
-    "run:firefox": "npm run clean:reports && npx cypress run --browser firefox"
+    "clean:reports": "rm -rf reports",
+    "cy:run": "cypress run",
+    "cy:parallel": "cypress-parallel -s cy:run -t 2 -d 'cypress/e2e/**/*.cy.js'",
+    "merge-reports": "mochawesome-merge reports/.jsons/*.json > reports/merged-report.json",
+    "generate-html-report": " marge reports/merged-report.json -o reports",
+    "all": "npm-run-all --continue-on-error clean:reports cy:parallel merge-reports generate-html-report",
+    "merge:reports": "node mergeReports.js",
+    "generate:html": "node generateHtmlReport.js"
   }
 }

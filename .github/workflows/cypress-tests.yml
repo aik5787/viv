@@ -24,10 +24,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci
-      - uses: cypress-io/github-action@v6
-        with:
-          working-directory: ./
-          browser: ${{ matrix.browser }}
+      - name: Run Cypress Tests in Parallel
+        run: npm run all -- --browser ${{ matrix.browser }}
         env:
           CYPRESS_INSTALL_BINARY: 0
       - name: Upload Mochawesome reports
@@ -35,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-reports-${{ matrix.browser }} 
-          path: ./cypress/reports
+          path: ./reports

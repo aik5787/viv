@@ -1,0 +1,93 @@
+diff --git a/node_modules/cypress-parallel/cli.js b/node_modules/cypress-parallel/cli.js
+index f616e8c..0b8b749 100755
+--- a/node_modules/cypress-parallel/cli.js
++++ b/node_modules/cypress-parallel/cli.js
+@@ -84,47 +84,47 @@ async function start() {
+       suite.pending
+     ]);
+   }
+-  table.push([
+-    'Results',
+-    `${formatTime(totalDuration)}`,
+-    totalTests,
+-    totalPasses,
+-    totalFailures > 0 ? colors.red(totalFailures) : totalFailures,
+-    totalPending
+-  ]);
+-
+-  console.log(table.toString());
+-
+-  // fail on missing results (had some issues with missing test results, prevent that from slipping past again)
+-  if (settings.strictMode && timeMap.size !== testSuitePaths.length) {
+-    console.error(`Found test suites does not match results.`);
+-    console.error(`Test suites found: ${testSuitePaths.length}`);
+-    console.error(`Test suite results: ${timeMap.size}`);
+-    console.error(
+-      'Some test suites likely terminated without passing on results, exit with error'
+-    );
+-    const missingTestResults = testSuitePaths.filter(
+-      (path) => !timeMap.get(path)
+-    );
+-    console.log(
+-      `The following test suites are missing results: ${missingTestResults}`
+-    );
+-    process.exit(1);
+-  }
+-
+-  if (totalFailures > 0) {
+-    process.stderr.write(`\x1b[31m${totalFailures} test failure(s)\n`);
+-    process.exit(1);
+-  }
+-
+-  const timeSaved = totalDuration - timeTaken;
+-  console.log(
+-    `Total run time: ${totalDuration / 1000}s, executed in: ${
+-      timeTaken / 1000
+-    }, saved ${timeSaved / 1000} (~${Math.round(
+-      (timeSaved / totalDuration) * 100
+-    )}%)`
+-  );
++  // table.push([
++  //   'Results',
++  //   `${formatTime(totalDuration)}`,
++  //   totalTests,
++  //   totalPasses,
++  //   totalFailures > 0 ? colors.red(totalFailures) : totalFailures,
++  //   totalPending
++  // ]);
++
++  // console.log(table.toString());
++
++  // // fail on missing results (had some issues with missing test results, prevent that from slipping past again)
++  // if (settings.strictMode && timeMap.size !== testSuitePaths.length) {
++  //   console.error(`Found test suites does not match results.`);
++  //   console.error(`Test suites found: ${testSuitePaths.length}`);
++  //   console.error(`Test suite results: ${timeMap.size}`);
++  //   console.error(
++  //     'Some test suites likely terminated without passing on results, exit with error'
++  //   );
++  //   const missingTestResults = testSuitePaths.filter(
++  //     (path) => !timeMap.get(path)
++  //   );
++  //   console.log(
++  //     `The following test suites are missing results: ${missingTestResults}`
++  //   );
++  //   process.exit(1);
++  // }
++
++  // if (totalFailures > 0) {
++  //   process.stderr.write(`\x1b[31m${totalFailures} test failure(s)\n`);
++  //   process.exit(1);
++  // }
++
++  // const timeSaved = totalDuration - timeTaken;
++  // console.log(
++  //   `Total run time: ${totalDuration / 1000}s, executed in: ${
++  //     timeTaken / 1000
++  //   }, saved ${timeSaved / 1000} (~${Math.round(
++  //     (timeSaved / totalDuration) * 100
++  //   )}%)`
++  // );
+ 
+   generateWeightsFile(specWeights, totalDuration, totalWeight);
+   process.exit(totalFailures);

@@ -24,6 +24,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci
+      - name: Apply Patches
+        run: npx patch-package
       - name: Set Browser Environment
         run: echo "BROWSER=${{ matrix.browser }}" >> $GITHUB_ENV  
       - name: Run Cypress Tests in Parallel

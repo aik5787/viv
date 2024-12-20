@@ -4,10 +4,12 @@
     "cypress": "^13.16.1",
     "cypress-mochawesome-reporter": "^3.8.2",
     "cypress-parallel": "^0.14.0",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "patch-package": "^8.0.0"
   },
   "scripts": {
     "smoke:chrome": "npx cypress run --env grepTags=@smoke --browser chrome",
+     "postinstall": "patch-package",
     "clean:reports": "rm -rf reports",
     "cy:run": "cypress run",
     "cy:parallel": "cypress-parallel -s cy:run -t 2 -d 'cypress/e2e/**/*.cy.js'",

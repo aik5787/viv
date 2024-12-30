@@ -17,6 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chrome, edge, firefox]
+        shard: [1, 2, 3]
     container:
       image: cypress/included:latest
       options: --user 1001
@@ -27,14 +28,19 @@ jobs:
       - name: Apply Patches
         run: npx patch-package
       - name: Set Browser Environment
-        run: echo "BROWSER=${{ matrix.browser }}" >> $GITHUB_ENV  
+        run: |
+          echo "BROWSER=${{ matrix.browser }}" >> $GITHUB_ENV
+          echo "SHARD=${{ matrix.shard }}" >> $GITHUB_ENV  
       - name: Run Cypress Tests in Parallel
-        run: npm run all
+        run: npm run cloud:all
         env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_INSTALL_BINARY: 0
+          BROWSER: ${{ matrix.browser }}
+          SHARD: ${{ matrix.shard }}
       - name: Upload Mochawesome reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mochawesome-reports-${{ matrix.browser }} 
+          name: mochawesome-reports-${{ matrix.browser }}-shard-${{ matrix.shard }} 
           path: ./reports

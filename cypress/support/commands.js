@@ -1,4 +1,5 @@
-import verificationData from "../fixtures/vefificationData.json";
+import verificationData from "../fixtures/verificationData.json";
+
 Cypress.Commands.add("errorHandler", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;

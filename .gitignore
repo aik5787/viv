@@ -1,2 +1,8 @@
 node_modules/
 .DS_Store
+cypress/downloads
+reports
+runner-results
+generateHtmlReport.js
+mergeReports.js
+multi-reporter-config.json

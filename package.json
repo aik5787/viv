@@ -18,7 +18,7 @@
     "all": "npm-run-all --continue-on-error clean:reports cy:parallel merge-reports generate-html-report",
     "merge:reports": "node mergeReports.js",
     "generate:html": "node generateHtmlReport.js",
-    "cy:cloud": "npx cypress run --record --key $CYPRESS_RECORD_KEY --parallel --group $BROWSER --browser $BROWSER",
+    "cy:cloud": "npx cypress run --record --key $CYPRESS_RECORD_KEY --parallel --group $BROWSER --browser $BROWSER --ci-build-id $GITHUB_RUN_ID",
     "cloud:all": "npm-run-all --continue-on-error clean:reports cy:cloud merge-reports generate-html-report"
   }
 }

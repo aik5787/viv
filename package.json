@@ -9,7 +9,7 @@
   },
   "scripts": {
     "smoke:chrome": "npx cypress run --env grepTags=@smoke --browser chrome",
-     "postinstall": "patch-package",
+    "postinstall": "patch-package",
     "clean:reports": "rm -rf reports",
     "cy:run": "cypress run",
     "cy:parallel": "cypress-parallel -s cy:run -t 2 -d 'cypress/e2e/**/*.cy.js'",
@@ -17,6 +17,8 @@
     "generate-html-report": " marge reports/merged-report.json -o reports",
     "all": "npm-run-all --continue-on-error clean:reports cy:parallel merge-reports generate-html-report",
     "merge:reports": "node mergeReports.js",
-    "generate:html": "node generateHtmlReport.js"
+    "generate:html": "node generateHtmlReport.js",
+    "cy:cloud": "npx cypress run --record --key $CYPRESS_RECORD_KEY --parallel",
+    "cloud:all": "npm-run-all --continue-on-error clean:reports cy:cloud merge-reports generate-html-report"
   }
 }

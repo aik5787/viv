@@ -29,8 +29,9 @@ jobs:
       - name: Set Browser Environment
         run: echo "BROWSER=${{ matrix.browser }}" >> $GITHUB_ENV  
       - name: Run Cypress Tests in Parallel
-        run: npm run all
+        run: npm run cloud:all
         env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_INSTALL_BINARY: 0
       - name: Upload Mochawesome reports
         if: always()

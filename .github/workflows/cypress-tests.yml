@@ -33,6 +33,7 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_INSTALL_BINARY: 0
+          BROWSER: ${{ matrix.browser }}
       - name: Upload Mochawesome reports
         if: always()
         uses: actions/upload-artifact@v4
